@@ -1,0 +1,97 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+bin/
+var/
+sdist/
+develop-eggs/
+.Python
+pip-wheel-metadata/
+.pytest_cache/
+.mypy_cache/
+.venv/
+venv/
+ENV/
+env/
+.env
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+env/
+venv/
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# Coverage
+.coverage
+htmlcov/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Build outputs
+dist/
+build/
+*.tgz
+
+# TypeScript
+*.tsbuildinfo
+
+# Optional: local env files
+.env.local
+.env.*.local
+
+# Databases
+*.sqlite3
+*.db
+
+# Editor directories and files
+*.swp
+*.swo
+__pycache__/
+
+# JetBrains
+.idea/
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.env
+__pycache__/
+*.pyc
+.idea/
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+venv/

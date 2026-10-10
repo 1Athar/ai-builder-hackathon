@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "food-ordering": {
+      "command": "/Users/soham.intern/Desktop/Mcp-Server/venv/bin/python",
+      "args": ["/Users/soham.intern/Desktop/Mcp-Server/server.py"]
+    },
+    "travel-booking": {
+      "command": "/Users/soham.intern/Desktop/Mcp-Server/venv/bin/python",
+      "args": ["/Users/soham.intern/Desktop/Mcp-Server/travel_server.py"]
+    }
+  }
+}
