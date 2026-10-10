@@ -1,7 +1,8 @@
-# 🌐 Gemini Ecosystem: Android App Functions (AAF) & RBI-Compliant Agentic Commerce
+# 🏆 Ai builder Hackathon: Gemini Agentic Commerce & Android App Functions (AAF)
 
 <div align="center">
 
+![Hackathon](https://img.shields.io/badge/Project-Ai%20Builder%20Hackathon-FF5722?style=for-the-badge&logo=rocket)
 ![Gemini Banner](https://img.shields.io/badge/Gemini%203%20Flash-Agentic%20Runtime-4285F4?style=for-the-badge&logo=google&logoColor=white)
 ![React Native](https://img.shields.io/badge/React%20Native-0.81.4-61DAFB?style=for-the-badge&logo=react&logoColor=black)
 ![Android](https://img.shields.io/badge/Android-API%2034%2B-3DDC84?style=for-the-badge&logo=android&logoColor=white)
@@ -9,7 +10,7 @@
 ![UPI Ready](https://img.shields.io/badge/NPCI%20%2F%20UPI-RBI%20Compliant-008080?style=for-the-badge)
 
 <p align="center">
-  <b>A unified, cross-platform agentic ecosystem bringing typed Android App Functions (AAF), interactive rich commerce carousels, and zero-trust, bank-regulated UPI payments to desktop and mobile.</b>
+  <b>Ai builder Hackathon Submission — A unified, cross-platform agentic ecosystem bringing typed Android App Functions (AAF), interactive rich commerce carousels, and zero-trust, bank-regulated UPI payments to desktop and mobile.</b>
 </p>
 
 [📱 Download Android APKs](#-downloadable-apks-ready-to-test) • [📐 Architecture & Security](#-system-architecture--regulatory-compliance) • [✨ Features](#-core-features-deep-dive) • [🚀 Quickstart](#-getting-started) • [🖼️ Gallery](#-visual-showcase--live-flow)
