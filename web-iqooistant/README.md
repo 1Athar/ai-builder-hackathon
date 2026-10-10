@@ -13,7 +13,7 @@
   <b>Ai builder Hackathon Submission — A unified, cross-platform agentic ecosystem bringing typed Android App Functions (AAF), interactive rich commerce carousels, and zero-trust, bank-regulated UPI payments to desktop and mobile.</b>
 </p>
 
-[📱 Download Android APKs](#-downloadable-apks-ready-to-test) • [📐 Architecture & Security](#-system-architecture--regulatory-compliance) • [✨ Features](#-core-features-deep-dive) • [🚀 Quickstart](#-getting-started) • [🖼️ Gallery](#-visual-showcase--live-flow)
+[📱 Download Android APKs](#-downloadable-apks-ready-to-test) • [📐 Architecture](#-system-architecture--regulatory-compliance) • [🔄 Full User Flows (Mobile & Web)](#-end-to-end-user-experience-flows) • [✨ Features](#-core-features-deep-dive) • [🚀 Quickstart](#-getting-started)
 
 </div>
 
@@ -73,6 +73,67 @@ Modern AI assistants can talk, but they struggle to execute real-world multi-app
 * **Zero-Credential Exposure**: The AI runtime **NEVER** sees or touches MPIN, OTP, CVV, or card numbers.
 * **Bank-Owned Consent Screen**: When an order is placed, a native deep-link or push request delegates authorization to the regulated banking app (**GGpay**).
 * **Deterministic Parameter Validation**: Tools are strictly typed with JSON schemas, preventing prompt injection from manipulating monetary values.
+
+---
+
+## 🔄 End-to-End User Experience Flows
+
+The architecture delivers a consistent, zero-trust commerce pattern across both **Native Android Mobile** and **Desktop Web**:
+The user orders through the AI runtime, receives an instant, bank-isolated authorization prompt in **Google Pay (GGpay)**, authenticates via UPI MPIN, and the assistant updates seamlessly to **"Payment Done"** with full order receipts.
+
+---
+
+### 📱 Flow 1: Native Mobile App Flow
+> **User orders via GGemini App ➔ Push Notification & Approval on Google Pay ➔ GGemini updates to "Payment Done"**
+
+```
+┌────────────────────────────────┐         ┌────────────────────────────────┐         ┌────────────────────────────────┐
+│      Step 1: GGemini App       │         │       Step 2: Google Pay       │         │      Step 3: GGemini App       │
+│                                │         │                                │         │                                │
+│  • User searches bus/hotel/food│         │  • Incoming UPI prompt pops up │         │  • User authenticates UPI PIN  │
+│  • RedBus carousel renders     │───────► │  • Displays ₹1500 to RedBus    │───────► │  • Real-time webhook fires     │
+│  • User taps "Book Ticket"     │         │  • VPA: prasad@okicici         │         │  • GGemini shows "Payment Done"│
+│  • Zero-trust intent dispatched│         │  • Bank-owned Approve/Decline  │         │  • PNR REDBUS-882910 confirmed │
+└────────────────────────────────┘         └────────────────────────────────┘         └────────────────────────────────┘
+```
+
+| Step 1: Order Initiation & Rich Carousel | Step 2: Google Pay Push Notification & Approval | Step 3: Bank Confirmation & "Payment Done" |
+|:---:|:---:|:---:|
+| <img src="assets/screenshots/flow1_mobile_step1_order.png" width="280" alt="Flow 1 Step 1: Mobile Order Initiation" /> | <img src="assets/screenshots/flow1_mobile_step2_gpay_approval.png" width="280" alt="Flow 1 Step 2: Google Pay Approval" /> | <img src="assets/screenshots/flow1_mobile_step3_payment_done.png" width="280" alt="Flow 1 Step 3: Payment Done" /> |
+| **User prompts GGemini** via voice or text ("Buses from Mumbai to Goa"). GGemini invokes RedBus Android App Functions and displays swipeable bus cards with departure, ratings, and fares. | **Zero-trust intent dispatched**. Google Pay receives the notification, surfacing the bank-regulated consent sheet with **₹ 1,500 to RedBus** and VPA `prasad@okicici`. | **User enters MPIN & taps Approve**. Deep-link/webhook verifies payment, GGemini updates transaction card to **"Payment Done"**, and outputs confirmed ticket PNR. |
+
+#### 🔍 Step-by-Step Flow 1 Walkthrough:
+1. **Capabilities Discovery & Interactive Selection**: The user queries GGemini for travel or dining. The assistant invokes typed schemas (`search_buses` or `search_hotels`) and displays interactive horizontal cards.
+2. **Intent Delegation (Zero-Trust)**: When the user confirms the booking (`select_bus` + `book_bus`), the assistant constructs a cryptographically isolated payment payload to the Cloudflare relay. **No financial credentials or account data are ever handled by the LLM.**
+3. **Google Pay Bank-Owned Auth**: The background worker delivers an approval request to the standalone Google Pay app. Google Pay renders the official UPI payment prompt detailing the merchant name, destination VPA, and exact monetary amount.
+4. **Real-Time Assistant Confirmation**: Upon entering their MPIN and tapping **"Approve"**, the callback webhook immediately signals GGemini. The UI status widget transitions from pulsing blue to green **"Payment Done (Successfully processed via Google Pay)"**, accompanied by the booking confirmation and PNR ticket.
+
+---
+
+### 🌐 Flow 2: Web Experience Flow (Gemini Desktop)
+> **User orders on Website ➔ Cross-device Notification on Google Pay ➔ Website updates to "Payment Done"**
+
+```
+┌────────────────────────────────┐         ┌────────────────────────────────┐         ┌────────────────────────────────┐
+│     Step 1: Gemini Desktop     │         │       Step 2: Google Pay       │         │     Step 3: Gemini Desktop     │
+│                                │         │        (Mobile Device)         │         │                                │
+│  • User prompts Web AI         │         │  • User receives phone alert   │         │  • Real-time poller detects    │
+│  • MakeMyTrip Carousel renders │───────► │  • Reviews ₹18,000 for stay    │───────► │    approval status on relay    │
+│  • User selects luxury resort  │         │  • Confirms VPA & enters PIN   │         │  • Card shows "Payment Done"   │
+│  • Web shows "Pending Approval"│         │  • Taps bank-owned "Approve"   │         │  • Booking voucher MMT-893201  │
+└────────────────────────────────┘         └────────────────────────────────┘         └────────────────────────────────┘
+```
+
+| Step 1: Web Request & Interactive Carousel | Step 2: Payment Initiated & Pending Approval | Step 3: Google Pay Approved ➔ "Payment Done" |
+|:---:|:---:|:---:|
+| <img src="assets/screenshots/flow2_web_step1_selection.png" width="340" alt="Flow 2 Step 1: Web Selection" /> | <img src="assets/screenshots/flow2_web_step2_pending_approval.png" width="340" alt="Flow 2 Step 2: Pending Approval" /> | <img src="assets/screenshots/flow2_web_step3_payment_done.png" width="340" alt="Flow 2 Step 3: Payment Done on Web" /> |
+| **User explores hotels on Web**. Prompting Gemini Desktop ("Hotels in Goa") triggers MakeMyTrip MCP tools, generating live hotel cards with per-night rates and photos. | **User clicks "Select" & confirms**. The payment MCP initiates the transaction. Web interface renders **"Pending Approval: Waiting for UPI PIN authentication on phone..."** | **User authorizes on Google Pay app**. Gemini Desktop's real-time poller receives bank approval, transitions widget to **"Payment Done"**, and outputs confirmed voucher. |
+
+#### 🔍 Step-by-Step Flow 2 Walkthrough:
+1. **Web Agentic Selection**: Using the edge-to-edge Gemini Desktop web client, the user searches for accommodations or groceries. Dynamic React components render swipeable carousels.
+2. **Cross-Device Payment Relay**: Once the user chooses a luxury stay (e.g., The Leela Goa for ₹18,000), Gemini Desktop initiates a payment session with the Cloudflare Worker Relay, associating the transaction with the user's UPI VPA.
+3. **Pending Approval Widget**: While the desktop awaits confirmation, it renders a pulsating Google Pay widget instructing the user: *"Payment authorization for ₹18,000 has been pushed to your Google Pay app. Please authenticate with your secure UPI PIN on your phone."*
+4. **Instant Web Synchronization**: The user approves the transaction on their mobile device in Google Pay. The web client's active status poller detects `status === 'APPROVED'`, instantly updates the UI card to **"Payment Done"**, and renders the complete booking voucher (`MMT-893201`).
 
 ---
 
