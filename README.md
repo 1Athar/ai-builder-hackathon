@@ -21,12 +21,13 @@
 
 ## 📌 Executive Summary
 
-Modern AI assistants can talk, but they struggle to execute real-world multi-app tasks securely. Existing solutions either require brittle UI scraping or ask users to hand sensitive credentials to AI prompts—violating financial regulations.
+<div align="center">
+  <img src="assets/app_comparison_illustration.png" alt="Before vs After: 3 Fragmented Apps vs 1 Unified Gemini Experience" width="950" />
+</div>
 
-**Gemini Ecosystem** solves this by implementing **Android App Functions (AAF)**:
-1. **Typed Capabilities Discovery**: Apps (Zomato, Blinkit, MakeMyTrip, RedBus, GGpay) publish strict schemas to an Android App Functions Registry.
-2. **Interactive Rich Media**: Instead of plain text walls, the AI outputs live horizontal swipeable carousels for hotel rooms, bus seats, and restaurant carts.
-3. **RBI-Compliant Zero-Trust Payments**: Payments never expose MPIN, OTP, or UPI credentials to the LLM. The AI invokes a typed payment intent that hands off to the bank-owned application (GGpay), where the user authenticates directly on UPI rails.
+**The Problem:** Today, everyday digital tasks are severely fragmented—forcing consumers into a frustrating, multi-app juggle. A user first consults an AI like Gemini for recommendations, exits to open a merchant app like Amazon or MakeMyTrip to manually search and compare options, and finally switches to a banking app to authenticate payments. This constant app-hopping causes massive friction, breaks user context, and leads to high customer drop-offs at every step of the purchasing journey.
+
+**The Solution:** Our platform collapses this entire journey into a single, unified conversational experience. By integrating Android App Functions (AAF) and interactive rich media carousels directly inside the assistant, users can discover, compare, and select products or travel bookings without ever leaving the chat interface. Crucially, monetary transactions are completed through a zero-trust, bank-regulated Google Pay authorization that triggers seamlessly within the flow—slashing transaction times, eliminating customer drop-off, and delivering a fast, frictionless, and secure commerce experience in one place.
 
 ---
 
