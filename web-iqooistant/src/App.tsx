@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import './App.css';
 import { chatWithLLM, type ChatMessage } from './llm/llmClient';
+import { getOpenRouterApiKey } from './config';
 
 interface Message {
   id: string;
@@ -29,6 +30,9 @@ function App() {
   });
   const [isAFModalVisible, setAFModalVisible] = useState(false);
   const [showApkBanner, setShowApkBanner] = useState(true);
+  const [isSettingsModalVisible, setSettingsModalVisible] = useState(false);
+  const [apiKeyInput, setApiKeyInput] = useState('');
+  const [keySavedMsg, setKeySavedMsg] = useState('');
 
   // Auto-scroll to bottom
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -218,8 +222,18 @@ function App() {
           return [...updated, ...newUIMessages];
         });
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
+      const errMsg = error?.message || 'Error communicating with assistant.';
+      setMessages((prev) => [...prev, {
+        id: Date.now().toString(),
+        type: 'assistant',
+        text: `⚠️ **API Error:** ${errMsg}`
+      }]);
+      if (errMsg.includes('Missing OpenRouter API key') || errMsg.includes('401') || errMsg.includes('Unauthorized')) {
+        setApiKeyInput(getOpenRouterApiKey());
+        setSettingsModalVisible(true);
+      }
     } finally {
       setIsTyping(false);
     }
@@ -248,7 +262,7 @@ function App() {
         <div className="sidebar-nav">
           <button className="nav-item active">New Conversation</button>
           <button className="nav-item">Transaction History</button>
-          <button className="nav-item">App Settings</button>
+          <button className="nav-item" onClick={() => { setApiKeyInput(getOpenRouterApiKey()); setKeySavedMsg(''); setSettingsModalVisible(true); }}>⚙️ App Settings</button>
         </div>
       </aside>
 
@@ -259,6 +273,61 @@ function App() {
           </button>
         </header>
         
+        {isSettingsModalVisible && (
+          <div className="modal-overlay" onClick={() => setSettingsModalVisible(false)}>
+            <div className="modal-content" onClick={e => e.stopPropagation()} style={{ maxWidth: '440px' }}>
+              <div className="modal-header">
+                <h3 className="modal-title">⚙️ App Settings</h3>
+                <button className="modal-close-text" onClick={() => setSettingsModalVisible(false)}>Done</button>
+              </div>
+              <div style={{ padding: '16px 0' }}>
+                <label style={{ display: 'block', fontWeight: 600, fontSize: '14px', marginBottom: '8px', color: '#1f1f1f' }}>
+                  OpenRouter API Key
+                </label>
+                <input
+                  type="password"
+                  placeholder="sk-or-v1-..."
+                  value={apiKeyInput}
+                  onChange={(e) => { setApiKeyInput(e.target.value); setKeySavedMsg(''); }}
+                  style={{
+                    width: '100%',
+                    padding: '10px 12px',
+                    borderRadius: '8px',
+                    border: '1px solid #d1d5db',
+                    fontSize: '14px',
+                    boxSizing: 'border-box'
+                  }}
+                />
+                <p style={{ fontSize: '12px', color: '#6b7280', marginTop: '8px', lineHeight: '1.4' }}>
+                  Required for LLM inferences and Android App Functions. Stored securely in your browser's local storage.
+                </p>
+                {keySavedMsg && (
+                  <p style={{ color: '#16a34a', fontSize: '13px', fontWeight: 600, marginTop: '10px' }}>
+                    {keySavedMsg}
+                  </p>
+                )}
+                <div style={{ marginTop: '16px', display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
+                  <button
+                    className="apk-download-btn"
+                    style={{ border: 'none', cursor: 'pointer' }}
+                    onClick={() => {
+                      if (!apiKeyInput.trim()) {
+                        setKeySavedMsg('⚠️ Please enter a valid API key.');
+                        return;
+                      }
+                      localStorage.setItem('VITE_OPENROUTER_API_KEY', apiKeyInput.trim());
+                      setKeySavedMsg('✅ Key saved! Ready to chat.');
+                      setTimeout(() => setSettingsModalVisible(false), 900);
+                    }}
+                  >
+                    Save Key
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {isAFModalVisible && (
           <div className="modal-overlay" onClick={() => setAFModalVisible(false)}>
             <div className="modal-content" onClick={e => e.stopPropagation()}>

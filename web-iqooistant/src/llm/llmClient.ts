@@ -1,4 +1,4 @@
-import { OPENROUTER_API_KEY, LLM_MODEL } from '../config';
+import { getOpenRouterApiKey, LLM_MODEL } from '../config';
 import { browse_menu, add_to_cart, view_cart, place_order } from '../tools/foodTools';
 import { search_hotels, select_hotel, book_trip } from '../tools/travelTools';
 import { search_buses, select_bus, book_bus } from '../tools/busTools';
@@ -213,7 +213,11 @@ export async function chatWithLLM(
     };
     
     if (!useLocalLLM) {
-      headers['Authorization'] = `Bearer ${OPENROUTER_API_KEY}`;
+      const activeKey = getOpenRouterApiKey();
+      if (!activeKey) {
+        throw new Error("Missing OpenRouter API key. Please click 'App Settings' in the sidebar to enter your key.");
+      }
+      headers['Authorization'] = `Bearer ${activeKey}`;
     }
 
     const filteredTools = tools.filter(t => {

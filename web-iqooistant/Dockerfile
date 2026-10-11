@@ -31,6 +31,10 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 # Copy compiled static assets from builder stage
 COPY --from=builder /app/dist /usr/share/nginx/html
 
+# Copy runtime env generator for Cloud Run environment variables
+COPY generate-env.sh /docker-entrypoint.d/40-generate-env.sh
+RUN chmod +x /docker-entrypoint.d/40-generate-env.sh
+
 # Cloud Run routes to port 8080 by default
 EXPOSE 8080
 

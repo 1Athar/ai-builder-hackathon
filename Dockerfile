@@ -31,6 +31,10 @@ COPY web-iqooistant/nginx.conf /etc/nginx/conf.d/default.conf
 # Copy compiled static assets from builder stage
 COPY --from=builder /app/dist /usr/share/nginx/html
 
+# Copy runtime env generator for Cloud Run environment variables
+COPY web-iqooistant/generate-env.sh /docker-entrypoint.d/40-generate-env.sh
+RUN chmod +x /docker-entrypoint.d/40-generate-env.sh
+
 # Expose Cloud Run default port
 EXPOSE 8080
 
