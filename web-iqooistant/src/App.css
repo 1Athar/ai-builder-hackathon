@@ -703,3 +703,165 @@ input:checked + .slider:before {
   color: #188038;
 }
 
+/* APK Notice Banner Card */
+.apk-notice-card {
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 24px;
+  background: #ffffff;
+  border: 1px solid #e1e7f0;
+  border-left: 4px solid #1a73e8;
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: row;
+  padding: 18px 20px;
+  gap: 16px;
+  align-items: flex-start;
+  transition: all 0.2s ease;
+}
+
+.apk-notice-icon-box {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  background: #f1f4f9;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+}
+
+.apk-notice-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.apk-notice-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.apk-notice-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.apk-notice-title-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.apk-badge {
+  font-size: 11px;
+  font-weight: 600;
+  color: #1a73e8;
+  background: #e8f0fe;
+  padding: 2px 8px;
+  border-radius: 20px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.apk-notice-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1f1f1f;
+  margin: 0;
+}
+
+.apk-notice-close {
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  color: #80868b;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+}
+
+.apk-notice-close:hover {
+  background: #f1f3f4;
+  color: #202124;
+}
+
+.apk-notice-desc {
+  font-size: 13px;
+  color: #5f6368;
+  line-height: 1.5;
+  margin: 4px 0 14px 0;
+}
+
+.apk-notice-desc strong {
+  color: #202124;
+}
+
+.apk-notice-footer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.apk-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #1a73e8;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(26, 115, 232, 0.25);
+}
+
+.apk-download-btn:hover {
+  background: #1557b0;
+  box-shadow: 0 4px 10px rgba(26, 115, 232, 0.35);
+  transform: translateY(-1px);
+}
+
+.apk-notice-meta {
+  font-size: 12px;
+  color: #80868b;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.apk-notice-meta code {
+  background: #f1f3f4;
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: #3c4043;
+  font-family: monospace;
+}
+
+.dot-sep {
+  color: #dadce0;
+}
+
+@media (max-width: 600px) {
+  .apk-notice-card {
+    flex-direction: column;
+    padding: 14px;
+  }
+  .apk-notice-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
+
+
