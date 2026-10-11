@@ -22,7 +22,7 @@
 ## 📌 Executive Summary
 
 <div align="center">
-  <img src="assets/app_comparison_illustration.png" alt="Before vs After: 3 Fragmented Apps vs 1 Unified Gemini Experience" width="950" />
+  <img src="assets/app_comparison_animated.gif" alt="Before vs After: 3 Fragmented Apps vs 1 Unified Gemini Experience" width="950" />
 </div>
 
 **The Problem:** Today, everyday digital tasks are severely fragmented—forcing consumers into a frustrating, multi-app juggle. A user first consults an AI like Gemini for recommendations, exits to open a merchant app like Amazon or MakeMyTrip to manually search and compare options, and finally switches to a banking app to authenticate payments. This constant app-hopping causes massive friction, breaks user context, and leads to high customer drop-offs at every step of the purchasing journey.
