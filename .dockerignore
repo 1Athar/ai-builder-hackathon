@@ -1,0 +1,11 @@
+# Ignore unrelated applications in the mono-repo to keep build lean
+chromepeapp
+Iqooistant
+Payment-mcp-servers
+assets
+.git
+.gitignore
+*.sh
+web-iqooistant/node_modules
+web-iqooistant/dist
+web-iqooistant/.env.local
