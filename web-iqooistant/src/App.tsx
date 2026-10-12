@@ -392,8 +392,9 @@ function App() {
                 </p>
                 <div className="apk-notice-footer">
                   <a 
-                    href="/GGpay-v1.0.apk" 
-                    download="GGpay-v1.0.apk" 
+                    href="https://github.com/1Athar/ai-builder-hackathon/raw/main/apks/GGpay-v1.0.apk" 
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="apk-download-btn"
                   >
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
